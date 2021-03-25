@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Excess Bits: Countdown Clock</title>
+		<title>27-Bit Clock</title>
 		<!-- AUTHOR: Kaigani - 2021 -->
 
 		<!-- mobile viewport: -->
@@ -18,17 +18,35 @@
 				hhmmss : 'xxxxxx',
 				canvasList : []
 			}
-
-			const launchDate = new Date('Sun Mar 28 2021 10:00:00 GMT-0700')
 	
             window.addEventListener('load', init, false)
 
             function runLoop(){
+				/*
+                // Control FPS
+                this.timestamp = (this.timestamp)?this.timestamp:Date.now()
+                var newTimestamp = Date.now()
+                var debouncePass = ((newTimestamp - this.timestamp) > 1000) // 1s delay
+
+                if(debouncePass){
+                    this.timestamp = newTimestamp
+
+                    // UPDATE 
+                    update()
+                
+                }
+
+                requestAnimationFrame(runLoop) // for animation
+				*/
 				update()
 				setInterval(update,1000)
 			}
 			
 			function init(){
+				let timestamp = new Date()
+				//timeMachine.h.last = timestamp.getHours().toString().padStart(2,'0')
+				//timeMachine.m.last = timestamp.getMinutes().toString().padStart(2,'0')
+				//timeMachine.s.last = timestamp.getSeconds().toString().padStart(2,'0')
 
 				let el = document.getElementById('timeBlock')
 				// hh
@@ -59,14 +77,8 @@
 
 			function update() {
 
-				let countdown = (launchDate.getTime()-Date.now())/1000
-				
-				let hours = parseInt(countdown / 3600)
-				let secondsLeft = parseInt(countdown - hours * 3600)
-				let minutes = parseInt(secondsLeft / 60)
-				let seconds = parseInt(secondsLeft - minutes * 60)
-
-				let hhmmss = hours.toString().padStart(2,'0')+minutes.toString().padStart(2,'0')+seconds.toString().padStart(2,'0')
+				let timestamp = new Date()
+				let hhmmss = timestamp.getHours().toString().padStart(2,'0')+timestamp.getMinutes().toString().padStart(2,'0')+timestamp.getSeconds().toString().padStart(2,'0')
 				//console.log(hhmmss)
                 
 				for(let i=0;i<6;i++){
@@ -212,8 +224,7 @@
 		
 		
 		<div class="header">
-		  <p>EXCESS BITS</p>
-		  <p>coming soon</p>
+		  <p>27-BIT CLOCK</p>
 		</div>
 		
 		<div class="row">
