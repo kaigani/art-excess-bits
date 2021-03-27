@@ -60,6 +60,10 @@
 			function update() {
 
 				let countdown = (launchDate.getTime()-Date.now())/1000
+
+				if(countdown < 0){
+					window.location.href='app.html'
+				}
 				
 				let hours = parseInt(countdown / 3600)
 				let secondsLeft = parseInt(countdown - hours * 3600)
