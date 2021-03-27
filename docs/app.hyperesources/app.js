@@ -8,13 +8,16 @@ const SELLER = "0x79CC59F415039F1f91e6deE5Db40E7bb4Ab2608b"
 
 let saleID = '' // overwrite when found
 
-let currentHash = "0x58b0b45b9cf1a5366738abcc2559d06fb96d733ad989fd60863b5288c9a8d42e"
+let currentHash = "0xb643c024ce1faf6bd6b6982ce9fe06f46cc1482a270eb8388932cb0a73fbca4a" // #0/1024
 let currentToken = -1
 
 function updateHash(hash){
     hash = hash || currentHash
+    if(hash.toLowerCase() === 'random'){
+      hash = getRandomHash()
+    }
     // validate hash
-    // e.g. "0x58b0b45b9cf1a5366738abcc2559d06fb96d733ad989fd60863b5288c9a8d42e"
+    // e.g. "0xb643c024ce1faf6bd6b6982ce9fe06f46cc1482a270eb8388932cb0a73fbca4a"
     if(hash && hash.length === 66 && hash.substr(2).split('').reduce((prev,curr)=>{ return prev && !isNaN(parseInt(curr,16)) },true) ){
         currentHash = hash
     }
@@ -45,6 +48,17 @@ function updateHash(hash){
             }
           })
     }
+}
+
+function getRandomHash(){
+  let hash = '0x'
+  for(let i=0;i<64;i++){
+    hash += parseInt(Math.random()*16).toString(16)
+  }
+  return hash
+}
+function randomize(){
+  updateHash(getRandomHash())
 }
 
 function buy(){
