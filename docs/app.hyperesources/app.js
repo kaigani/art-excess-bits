@@ -26,6 +26,7 @@ function updateHash(hash){
     }
 
     currentToken = hashList.indexOf(currentHash)
+    saleID = ''
 
     document.getElementById('kai_token_id').innerText = currentToken !== -1 ? currentToken : '???'
     document.getElementById('kai_buy_btn').style.display = 'none' 
