@@ -1,10 +1,13 @@
 const cargo = new window.cargoJs.Cargo({
-    //network: 'production'
-    network: 'development'
+    network: 'production'
+    //network: 'development'
 })
   
-const COLLECTION_ADDRESS = "0x75d6aad399b6e28692689c6029d146463a887ad4" // full 1024+ set - not a Cargo contract
-const SELLER = "0x79CC59F415039F1f91e6deE5Db40E7bb4Ab2608b"
+//const COLLECTION_ADDRESS = "0x75d6aad399b6e28692689c6029d146463a887ad4" // full 1024+ set - not a Cargo contract
+//const SELLER = "0x79CC59F415039F1f91e6deE5Db40E7bb4Ab2608b"
+
+const COLLECTION_ADDRESS = "0xe851732ef755bea13be73da12bbaada5f8c37b84" // PRODUCTION: EXCESS BITS
+const SELLER = "0xC5e38233Cc0D7CFf9340e6139367aBA498EC9b18"
 
 let saleID = '' // overwrite when found
 
@@ -32,7 +35,8 @@ function updateHash(hash){
     drawToken_27(document.getElementById('canvas_1'),currentHash)
     drawToken_XS(document.getElementById('canvas_2'),currentHash)
 
-    if(currentToken > -1 && currentToken < 1023){ // skip 1024 - which is token #0
+    if(currentToken > -1){ 
+        currentToken = currentToken > 0 ? currentToken : 1024 // fix ID wrap
         cargo.api.getTokenDetails(COLLECTION_ADDRESS, currentToken).then(response => {
             // Do something with response
             console.log('GET TOKEN BY ID',currentToken,response)
