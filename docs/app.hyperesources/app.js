@@ -41,20 +41,26 @@ function updateHash(hash){
         currentToken = currentToken > 0 ? currentToken : 1024 // fix ID wrap
         cargo.api.getTokenDetails(COLLECTION_ADDRESS, currentToken).then(response => {
             // Do something with response
-            console.log('GET TOKEN BY ID',currentToken,response)
-            if(response.data.resaleItem && response.data.resaleItem.seller === SELLER){
-              console.log('FOR SALE: ',response.data.resaleItem._id)
-              console.log('BY',response.data.resaleItem.seller)
-              document.getElementById('kai_buy_btn').style.display = 'inline'
+            console.log('GET TOKEN BY ID',currentToken,response.data.tokenId,response)
+            console.log('TOKEN MATCH:',currentToken === parseInt(response.data.tokenId) ? 'YES' : 'NO')
 
-              saleID = response.data.resaleItem._id
-            }else{
-              console.log('NOT FOR SALE')
-              document.getElementById('kai_sold_badge').style.display = 'inline'
+            // ONLY UPDATE ON A CURRENT REQUEST
+            if(currentToken === parseInt(response.data.tokenId)){
+              if(response.data.resaleItem && response.data.resaleItem.seller === SELLER){
+                console.log('FOR SALE: ',response.data.resaleItem._id)
+                console.log('BY',response.data.resaleItem.seller)
+                document.getElementById('kai_buy_btn').style.display = 'inline'
+
+                saleID = response.data.resaleItem._id
+              }else{
+                console.log('NOT FOR SALE')
+                document.getElementById('kai_sold_badge').style.display = 'inline'
+              }
+
+              // re-activate shuffle button
+              document.getElementById('kai_shuffle_btn').style.display = 'inline'
             }
 
-            // re-activate shuffle button
-            document.getElementById('kai_shuffle_btn').style.display = 'inline'
           })
     }
 }
