@@ -31,7 +31,7 @@ function updateHash(hash){
     document.getElementById('kai_token_id').innerText = currentToken !== -1 ? currentToken : '???'
     document.getElementById('kai_buy_btn').style.display = 'none' 
     document.getElementById('kai_sold_badge').style.display = 'none' 
-    document.getElementById('kai_shuffle_btn').style.display = 'none' // don't flip page until we've checked the sale
+    //document.getElementById('kai_shuffle_btn').style.display = 'none' // don't flip page until we've checked the sale
     document.getElementById('kai_hash').innerText = currentHash.toUpperCase()
 
     drawToken_27(document.getElementById('canvas_1'),currentHash)
@@ -58,7 +58,7 @@ function updateHash(hash){
               }
 
               // re-activate shuffle button
-              document.getElementById('kai_shuffle_btn').style.display = 'inline'
+              //document.getElementById('kai_shuffle_btn').style.display = 'inline'
             }
 
           })
